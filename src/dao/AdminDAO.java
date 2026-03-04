@@ -1,4 +1,8 @@
 package dao;
 
-public class AdminDAO {
+import model.Admin;
+
+public interface AdminDAO {
+    Admin login(String username, String password);
+    void addAdmin(Admin admin);
 }
