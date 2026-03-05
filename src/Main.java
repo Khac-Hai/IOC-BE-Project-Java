@@ -3,6 +3,11 @@ import dao.impl.AdminDAOImpl;
 import business.AdminService;
 import business.impl.AdminServiceImpl;
 import presentation.AdminView;
+import dao.CustomerDAO;
+import dao.impl.CustomerDAOImpl;
+import business.CustomerService;
+import business.impl.CustomerServiceImpl;
+import presentation.CustomerView;
 
 public class Main {
     public static void main(String[] args) {
@@ -15,5 +20,11 @@ public class Main {
 
         // Thêm admin mới (tuỳ chọn)
         // adminView.addAdminMenu();
+        CustomerDAO customerDAO = new CustomerDAOImpl();
+        CustomerService customerService = new CustomerServiceImpl(customerDAO);
+        CustomerView customerView = new CustomerView(customerService);
+
+        customerView.showMenu();
     }
 }
+
