@@ -1,52 +1,38 @@
 package model;
 
-// 4. Invoice
 import java.time.LocalDateTime;
 
 public class Invoice {
     private int id;
-    private Customer customer;
+    private int customerId;
     private LocalDateTime createdAt;
     private double totalAmount;
 
     public Invoice() {}
-    public Invoice(int id, Customer customer, LocalDateTime createdAt, double totalAmount) {
+
+    public Invoice(int id, int customerId, LocalDateTime createdAt, double totalAmount) {
         this.id = id;
-        this.customer = customer;
+        this.customerId = customerId;
         this.createdAt = createdAt;
         this.totalAmount = totalAmount;
     }
 
     // Getters & Setters
-    public int getId() {
-        return id;
-    }
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    public int getCustomerId() { return customerId; }
+    public void setCustomerId(int customerId) { this.customerId = customerId; }
 
-    public Customer getCustomer() {
-        return customer;
-    }
+    public LocalDateTime getCreatedAt() { return createdAt; }
+    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
+    public double getTotalAmount() { return totalAmount; }
+    public void setTotalAmount(double totalAmount) { this.totalAmount = totalAmount; }
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public double getTotalAmount() {
-        return totalAmount;
-    }
-
-    public void setTotalAmount(double totalAmount) {
-        this.totalAmount = totalAmount;
+    @Override
+    public String toString() {
+        return String.format("ID: %d | Khách hàng ID: %d | Ngày: %s | Tổng tiền: %.0f",
+                id, customerId, createdAt, totalAmount);
     }
 }

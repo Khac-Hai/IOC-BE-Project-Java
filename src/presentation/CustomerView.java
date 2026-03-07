@@ -20,7 +20,7 @@ public class CustomerView {
             System.out.println("2. Thêm khách hàng mới");
             System.out.println("3. Cập nhật thông tin khách hàng");
             System.out.println("4. Xóa khách hàng theo ID");
-            System.out.println("5. Thoát");
+            System.out.println("5. Quay lại menu chính");
             System.out.print("Chọn: ");
             int choice = scanner.nextInt();
             scanner.nextLine();

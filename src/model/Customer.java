@@ -57,5 +57,9 @@ public class Customer {
     public void setAddress(String address) {
         this.address = address;
     }
+    @Override
+        public String toString() {
+            return String.format("ID: %d | Tên: %s | SĐT: %s | Email: %s | Địa chỉ: %s", id, name, phone, email, address);
+        }
 }
 

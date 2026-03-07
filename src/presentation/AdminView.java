@@ -29,15 +29,4 @@ public class AdminView {
             return null;
         }
     }
-
-    public void addAdminMenu() {
-        System.out.println("===== THÊM ADMIN MỚI =====");
-        System.out.print("Tài khoản: ");
-        String username = scanner.nextLine();
-        System.out.print("Mật khẩu: ");
-        String password = scanner.nextLine();
-
-        adminService.addAdmin(new Admin(0, username, password));
-        System.out.println("Thêm admin thành công!");
-    }
 }
