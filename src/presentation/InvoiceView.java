@@ -42,19 +42,32 @@ public class InvoiceView {
                     System.out.println("1. Tìm theo tên khách hàng");
                     System.out.println("2. Tìm theo ngày/tháng/năm");
                     System.out.println("3. Quay lại menu hóa đơn");
+                    System.out.print("Chọn: ");
                     int opt = scanner.nextInt();
                     scanner.nextLine();
                     if (opt == 1) {
                         System.out.print("Tên khách hàng: ");
                         String name = scanner.nextLine();
-                        invoiceService.findByCustomerName(name).forEach(System.out::println);
+                        var results = invoiceService.findByCustomerName(name);
+                        if (results.isEmpty()) {
+                            System.out.println("Không tìm thấy hóa đơn cho khách hàng: " + name);
+                        } else {
+                            results.forEach(System.out::println);
+                        }
                     } else if (opt == 2) {
                         System.out.print("Ngày (yyyy-MM-dd): ");
                         String date = scanner.nextLine();
-                        invoiceService.findByDate(date).forEach(System.out::println);
-                    }else if (opt == 3) {
+                        var results = invoiceService.findByDate(date);
+                        if (results.isEmpty()) {
+                            System.out.println("Không tìm thấy hóa đơn cho ngày: " + date);
+                        } else {
+                            results.forEach(System.out::println);
+                        }
+                    } else if (opt == 3) {
                         // Thoát khỏi vòng lặp tìm kiếm để quay lại menu hóa đơn
                         break;
+                    } else {
+                        System.out.println("Lựa chọn không hợp lệ, vui lòng nhập lại!");
                     }
                     break;
                 case 4:
