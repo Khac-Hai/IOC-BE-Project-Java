@@ -24,7 +24,6 @@ public class InvoiceView {
             System.out.print("Chọn: ");
             int choice = scanner.nextInt();
             scanner.nextLine();
-
             switch (choice) {
                 case 1:
                     invoiceService.listAllInvoices().forEach(System.out::println);
@@ -45,31 +44,33 @@ public class InvoiceView {
                     System.out.print("Chọn: ");
                     int opt = scanner.nextInt();
                     scanner.nextLine();
-                    if (opt == 1) {
-                        System.out.print("Tên khách hàng: ");
-                        String name = scanner.nextLine();
-                        var results = invoiceService.findByCustomerName(name);
-                        if (results.isEmpty()) {
-                            System.out.println("Không tìm thấy hóa đơn cho khách hàng: " + name);
-                        } else {
-                            results.forEach(System.out::println);
-                        }
-                    } else if (opt == 2) {
-                        System.out.print("Ngày (yyyy-MM-dd): ");
-                        String date = scanner.nextLine();
-                        var results = invoiceService.findByDate(date);
-                        if (results.isEmpty()) {
-                            System.out.println("Không tìm thấy hóa đơn cho ngày: " + date);
-                        } else {
-                            results.forEach(System.out::println);
-                        }
-                    } else if (opt == 3) {
-                        // Thoát khỏi vòng lặp tìm kiếm để quay lại menu hóa đơn
-                        break;
-                    } else {
-                        System.out.println("Lựa chọn không hợp lệ, vui lòng nhập lại!");
+                    switch (opt) {
+                        case 1:
+                            System.out.print("Tên khách hàng: ");
+                            String name = scanner.nextLine();
+                            var resultsByName = invoiceService.findByCustomerName(name);
+                            if (resultsByName.isEmpty()) {
+                                System.out.println("Không tìm thấy hóa đơn cho khách hàng: " + name);
+                            } else {
+                                resultsByName.forEach(System.out::println);
+                            }
+                            break;
+                        case 2:
+                            System.out.print("Ngày (yyyy-MM-dd): ");
+                            String date = scanner.nextLine();
+                            var resultsByDate = invoiceService.findByDate(date);
+                            if (resultsByDate.isEmpty()) {
+                                System.out.println("Không tìm thấy hóa đơn cho ngày: " + date);
+                            } else {
+                                resultsByDate.forEach(System.out::println);
+                            }
+                            break;
+                        case 3:
+                            // Quay lại menu hóa đơn
+                            break;
+                        default:
+                            System.out.println("Lựa chọn không hợp lệ, vui lòng nhập lại!");
                     }
-                    break;
                 case 4:
                     return;
             }

@@ -33,8 +33,6 @@ public class RevenueDAOImpl implements RevenueDAO {
         return 0;
     }
 
-
-
     @Override
     public double getRevenueByYear(String year) {
         String sql = "SELECT SUM(total_amount) AS revenue FROM invoice WHERE TO_CHAR(created_at, 'YYYY') = ?";

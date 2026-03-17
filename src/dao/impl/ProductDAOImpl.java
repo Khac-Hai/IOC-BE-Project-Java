@@ -52,8 +52,12 @@ public class ProductDAOImpl implements ProductDAO {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                return new Product(rs.getInt("id"), rs.getString("name"),
-                        rs.getString("brand"), rs.getDouble("price"), rs.getInt("stock"));
+                return new Product(
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getString("brand"),
+                        rs.getDouble("price"),
+                        rs.getInt("stock"));
             }
         } catch (SQLException e) { e.printStackTrace(); }
         return null;
