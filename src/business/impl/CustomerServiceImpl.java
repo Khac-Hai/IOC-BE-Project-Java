@@ -36,7 +36,6 @@ public class CustomerServiceImpl implements CustomerService {
                 throw new IllegalStateException("Email đã tồn tại, vui lòng nhập lại!");
             }
         }
-
         customerDAO.addCustomer(customer);
     }
 

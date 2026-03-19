@@ -4,6 +4,7 @@ import business.impl.*;
 import model.InvoiceDetail;
 import presentation.*;
 
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -40,10 +41,19 @@ public class Main {
                         System.out.println("4. Thống kê doanh thu");
                         System.out.println("5. Đăng xuất");
                         System.out.println("=================================");
-                        System.out.print("Nhập lựa chọn: ");
-                        int mainChoice = sc.nextInt();
+                        int mainChoice;
+                        while (true) {
+                            try{
+                                System.out.print("Nhập lựa chọn: ");
+                                mainChoice = sc.nextInt();
+                                break;
+                            }
+                            catch (InputMismatchException e){
+                                System.out.println("Lựa chọn không hợp lệ!");
+                                sc.nextLine();
+                            }
+                        }
                         sc.nextLine();
-
                         switch (mainChoice) {
                             case 1:
                                 new ProductView(productService).showMenu();

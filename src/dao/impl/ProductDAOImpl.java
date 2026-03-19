@@ -42,7 +42,12 @@ public class ProductDAOImpl implements ProductDAO {
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, id);
             ps.executeUpdate();
-        } catch (SQLException e) { e.printStackTrace(); }
+        } catch (SQLException e) {
+            if (e.getMessage().contains("violates foreign key constraint")) {
+                throw new IllegalStateException("Sản phẩm đã tồn tại trong đơn hàng!", e);
+            }
+            throw new RuntimeException("Lỗi khi xóa sản phẩm: " + e.getMessage(), e);
+        }
     }
 
     @Override

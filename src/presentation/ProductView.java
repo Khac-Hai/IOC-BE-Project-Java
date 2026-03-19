@@ -59,9 +59,16 @@ public class ProductView {
                             }
                         }
 
-
-                        System.out.print("Hãng: ");
-                        String brand = scanner.nextLine();
+                        String brand;
+                        while (true) {
+                            System.out.print("Hãng: ");
+                            brand = scanner.nextLine();
+                            if (brand.isBlank()) {
+                                System.out.println("Tên hãng không được để trống, vui lòng nhập lại!");
+                            }else {
+                                break;
+                            }
+                        }
 
                         double price;
                         while (true) {
@@ -116,17 +123,35 @@ public class ProductView {
                             break;
                         }
                         System.out.println("Thông tin hiện tại: " + pUpdate);
-                        System.out.print("Tên mới: ");
-                        pUpdate.setName(scanner.nextLine());
-                        System.out.print("Hãng mới: ");
-                        pUpdate.setBrand(scanner.nextLine());
-                        try {
-                            System.out.print("Giá mới: ");
-                            pUpdate.setPrice(Double.parseDouble(scanner.nextLine()));
-                            System.out.print("Tồn kho mới: ");
-                            pUpdate.setStock(Integer.parseInt(scanner.nextLine()));
-                        } catch (NumberFormatException e) {
-                            System.out.println("Giá hoặc tồn kho không hợp lệ!");
+                        while (true) {
+                            try {
+                                System.out.print("Tên mới: ");
+                                pUpdate.setName(scanner.nextLine());
+                                if(pUpdate.getName().isBlank()) {
+                                    System.out.println("Tên không được để trống!");
+                                    continue;
+                                }
+                                System.out.print("Hãng mới: ");
+                                pUpdate.setBrand(scanner.nextLine());
+                                if(pUpdate.getBrand().isBlank()) {
+                                    System.out.println("Hãng không được để trống!");
+                                    continue;
+                                }
+                                System.out.print("Giá mới: ");
+                                pUpdate.setPrice(Double.parseDouble(scanner.nextLine()));
+                                if(pUpdate.getPrice() < 0) {
+                                    System.out.println("Giá phải lớn hơn 0!");
+                                    continue;
+                                }
+                                System.out.print("Tồn kho mới: ");
+                                pUpdate.setStock(Integer.parseInt(scanner.nextLine()));
+                                if(pUpdate.getStock() < 0) {
+                                    System.out.println("Tồn kho phải lớn hơn 0!");
+                                    continue;
+                                }
+                            } catch (NumberFormatException e) {
+                                System.out.println("Giá hoặc tồn kho không hợp lệ!");
+                            }
                             break;
                         }
                         try {
