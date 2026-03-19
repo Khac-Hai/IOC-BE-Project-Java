@@ -17,9 +17,16 @@ public class AdminView {
         System.out.println("===== ĐĂNG NHẬP QUẢN TRỊ =====");
         System.out.print("Tài khoản: ");
         String username = scanner.nextLine();
+        if (username.trim().isEmpty()) {
+            System.out.println("Tài khoản không được để trống!");
+            return null;
+        }
         System.out.print("Mật khẩu: ");
         String password = scanner.nextLine();
-
+        if ( password.trim().isEmpty()) {
+            System.out.println("Tài khoản và mật khẩu không được để trống!");
+            return null;
+        }
         Admin admin = adminService.login(username, password);
         if (admin != null) {
             System.out.println("Đăng nhập thành công!");

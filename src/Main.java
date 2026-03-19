@@ -1,7 +1,10 @@
+import dao.InvoiceDetailDAO;
 import dao.impl.*;
 import business.impl.*;
+import model.InvoiceDetail;
 import presentation.*;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -12,8 +15,7 @@ public class Main {
         AdminServiceImpl adminService = new AdminServiceImpl(new AdminDAOImpl());
         ProductServiceImpl productService = new ProductServiceImpl(new ProductDAOImpl());
         CustomerServiceImpl customerService = new CustomerServiceImpl(new CustomerDAOImpl());
-        InvoiceServiceImpl invoiceService = new InvoiceServiceImpl(new InvoiceDAOImpl());
-        InvoiceDetailsServiceImpl invoiceDetailsService = new InvoiceDetailsServiceImpl(new InvoiceDetailsDAOImpl());
+        InvoiceServiceImpl invoiceService = new InvoiceServiceImpl(new InvoiceDAOImpl(), new InvoiceDetailDAOImpl());
         RevenueServiceImpl revenueService = new RevenueServiceImpl(new RevenueDAOImpl());
 
         // ===== GIAO DIỆN BẮT ĐẦU =====
@@ -50,13 +52,7 @@ public class Main {
                                 new CustomerView(customerService).showMenu();
                                 break;
                             case 3:
-                                new InvoiceView(invoiceService).showMenu();
-                                System.out.print("Nhập ID hóa đơn để xem chi tiết (0 để bỏ qua): ");
-                                int invoiceId = sc.nextInt();
-                                sc.nextLine();
-                                if (invoiceId > 0) {
-                                    new InvoiceDetailView(invoiceDetailsService).showMenu(invoiceId);
-                                }
+                                new InvoiceView(invoiceService,customerService,productService).showMenu();
                                 break;
                             case 4:
                                 new RevenueView(revenueService).showMenu();

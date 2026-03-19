@@ -20,7 +20,9 @@ public class CustomerDAOImpl implements CustomerDAO {
             ps.setString(3, customer.getEmail());
             ps.setString(4, customer.getAddress());
             ps.executeUpdate();
-        } catch (SQLException e) { e.printStackTrace(); }
+        } catch (SQLException e) {
+            throw new RuntimeException("Lỗi khi thêm khách hàng: " + e.getMessage(), e);
+        }
     }
 
     @Override
@@ -33,7 +35,9 @@ public class CustomerDAOImpl implements CustomerDAO {
             ps.setString(4, customer.getAddress());
             ps.setInt(5, customer.getId());
             ps.executeUpdate();
-        } catch (SQLException e) { e.printStackTrace(); }
+        } catch (SQLException e) {
+            throw new RuntimeException("Lỗi khi cập nhật khách hàng: " + e.getMessage(), e);
+        }
     }
 
     @Override
@@ -42,7 +46,12 @@ public class CustomerDAOImpl implements CustomerDAO {
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, id);
             ps.executeUpdate();
-        } catch (SQLException e) { e.printStackTrace(); }
+        } catch (SQLException e) {
+            if (e.getMessage().contains("violates foreign key constraint")) {
+                throw new IllegalStateException("Khách hàng có đơn hàng không thể xoá!", e);
+            }
+            throw new RuntimeException("Lỗi khi xóa khách hàng: " + e.getMessage(), e);
+        }
     }
 
     @Override
@@ -55,7 +64,9 @@ public class CustomerDAOImpl implements CustomerDAO {
                 return new Customer(rs.getInt("id"), rs.getString("name"),
                         rs.getString("phone"), rs.getString("email"), rs.getString("address"));
             }
-        } catch (SQLException e) { e.printStackTrace(); }
+        } catch (SQLException e) {
+            throw new RuntimeException("Lỗi khi tìm khách hàng: " + e.getMessage(), e);
+        }
         return null;
     }
 
@@ -69,7 +80,9 @@ public class CustomerDAOImpl implements CustomerDAO {
                 list.add(new Customer(rs.getInt("id"), rs.getString("name"),
                         rs.getString("phone"), rs.getString("email"), rs.getString("address")));
             }
-        } catch (SQLException e) { e.printStackTrace(); }
+        } catch (SQLException e) {
+            throw new RuntimeException("Lỗi khi lấy danh sách khách hàng: " + e.getMessage(), e);
+        }
         return list;
     }
 }
